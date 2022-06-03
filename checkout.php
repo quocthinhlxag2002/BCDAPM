@@ -1,7 +1,20 @@
+<?php
+ 
+  require_once("backend/authWithCookie.php");
+  require_once("backend/auth.php");
+  require_once("repository/cartRepository.php");
+  require_once("repository/shoeRepository.php");
+  require_once("repository/orderRepository.php");
+  $cartRepository = new CartRepository();
+  $shoeRepository = new ShoeRepository();
+  $orderRepository = new OrderRepository();
+
+  $infoUser = Auth::loginWithCookie();
+  
+  
+?>
 <!DOCTYPE html>
-<!--[if IE 7]><html class="ie ie7"><![endif]-->
-<!--[if IE 8]><html class="ie ie8"><![endif]-->
-<!--[if IE 9]><html class="ie ie9"><![endif]-->
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -36,9 +49,6 @@
     <!--WARNING: Respond.js doesn't work if you view the page via file://-->
     <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
   </head>
-  <!--[if IE 7]><body class="ie7 lt-ie8 lt-ie9 lt-ie10"><![endif]-->
-  <!--[if IE 8]><body class="ie8 lt-ie9 lt-ie10"><![endif]-->
-  <!--[if IE 9]><body class="ie9 lt-ie10"><![endif]-->
   <body class="ps-loading">
     <div class="header--sidebar"></div>
     <header class="header">
@@ -53,13 +63,6 @@
                     <?php
                       require_once("backend/filterWithCookie.php");
                     ?>
-                    <!-- <div class="btn-group ps-dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language<i class="fa fa-angle-down"></i></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">English</a></li>
-                        <li><a href="#">Japanese</a></li>
-                        <li><a href="#">Chinese</a></li>
-                      </ul>
-                    </div> -->
                   </div>
                 </div>
           </div>
@@ -74,68 +77,7 @@
                 <ul class="main-menu menu">
                   <li class="menu-item menu-item-has-children dropdown"><a href="index.php">Home</a>
                   </li>
-                  <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">Men</a>
-                    <div class="mega-menu">
-                      <div class="mega-wrap">
-                        <div class="mega-column">
-                          <ul class="mega-item mega-features">
-                            <li><a href="product-listing.php">NEW RELEASES</a></li>
-                            <li><a href="product-listing.php">FEATURES SHOES</a></li>
-                            <li><a href="product-listing.php">BEST SELLERS</a></li>
-                            <li><a href="product-listing.php">NOW TRENDING</a></li>
-                            <li><a href="product-listing.php">SUMMER ESSENTIALS</a></li>
-                            <li><a href="product-listing.php">MOTHER'S DAY COLLECTION</a></li>
-                            <li><a href="product-listing.php">FAN GEAR</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">Shoes</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">All Shoes</a></li>
-                            <li><a href="product-listing.php">Running</a></li>
-                            <li><a href="product-listing.php">Training & Gym</a></li>
-                            <li><a href="product-listing.php">Basketball</a></li>
-                            <li><a href="product-listing.php">Football</a></li>
-                            <li><a href="product-listing.php">Soccer</a></li>
-                            <li><a href="product-listing.php">Baseball</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">CLOTHING</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">Compression & Nike Pro</a></li>
-                            <li><a href="product-listing.php">Tops & T-Shirts</a></li>
-                            <li><a href="product-listing.php">Polos</a></li>
-                            <li><a href="product-listing.php">Hoodies & Sweatshirts</a></li>
-                            <li><a href="product-listing.php">Jackets & Vests</a></li>
-                            <li><a href="product-listing.php">Pants & Tights</a></li>
-                            <li><a href="product-listing.php">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">Accessories</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">Compression & Nike Pro</a></li>
-                            <li><a href="product-listing.php">Tops & T-Shirts</a></li>
-                            <li><a href="product-listing.php">Polos</a></li>
-                            <li><a href="product-listing.php">Hoodies & Sweatshirts</a></li>
-                            <li><a href="product-listing.php">Jackets & Vests</a></li>
-                            <li><a href="product-listing.php">Pants & Tights</a></li>
-                            <li><a href="product-listing.php">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">BRAND</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">NIKE</a></li>
-                            <li><a href="product-listing.php">Adidas</a></li>
-                            <li><a href="product-listing.php">Dior</a></li>
-                            <li><a href="product-listing.php">B&G</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                  <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">Men</a></li>
                   <li class="menu-item"><a href="#">Women</a></li>
                   <li class="menu-item"><a href="#">Kids</a></li>
                   <li class="menu-item menu-item-has-children dropdown"><a href="#">News</a>
@@ -158,34 +100,8 @@
               <input class="form-control" type="text" placeholder="Search Product…">
               <button><i class="ps-icon-search"></i></button>
             </form>
-            <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon-shopping-cart"></i></a>
-              <div class="ps-cart__listing">
-                <div class="ps-cart__content">
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/1.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">Amazin’ Glazin’</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/2.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">The Crusty Croissant</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/3.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">The Rolling Pin</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="ps-cart__total">
-                  <p>Number of items:<span>36</span></p>
-                  <p>Item Total:<span>£528.00</span></p>
-                </div>
-                <div class="ps-cart__footer"><a class="ps-btn" href="cart.php">Check out<i class="ps-icon-arrow-left"></i></a></div>
-              </div>
+            <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i></i></span><i class="ps-icon-shopping-cart"></i></a>
+            <?php require_once("formCart.php") ?>
             </div>
             <div class="menu-toggle"><span></span></div>
           </div>
@@ -202,57 +118,31 @@
     <main class="ps-main">
       <div class="ps-checkout pt-80 pb-80">
         <div class="ps-container">
-          <form class="ps-checkout__form" action="do_action" method="post">
+          <form class="ps-checkout__form" action="" method="post">
             <div class="row">
                   <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
                     <div class="ps-checkout__billing">
                       <h3>Billing Detail</h3>
                             <div class="form-group form-group--inline">
-                              <label>First Name<span>*</span>
+                              <label>Full Name<span>*</span>
                               </label>
-                              <input class="form-control" type="text">
-                            </div>
-                            <div class="form-group form-group--inline">
-                              <label>Last Name<span>*</span>
-                              </label>
-                              <input class="form-control" type="text">
-                            </div>
-                            <div class="form-group form-group--inline">
-                              <label>Company Name<span>*</span>
-                              </label>
-                              <input class="form-control" type="text">
+                              <input readonly value="<?php echo $infoUser['fullname'] ?>" class="form-control" type="text">
                             </div>
                             <div class="form-group form-group--inline">
                               <label>Email Address<span>*</span>
                               </label>
-                              <input class="form-control" type="email">
-                            </div>
-                            <div class="form-group form-group--inline">
-                              <label>Company Name<span>*</span>
-                              </label>
-                              <input class="form-control" type="text">
+                              <input readonly value="<?php echo $infoUser['email'] ?>" class="form-control" type="email">
                             </div>
                             <div class="form-group form-group--inline">
                               <label>Phone<span>*</span>
                               </label>
-                              <input class="form-control" type="text">
+                              <input readonly value="<?php echo $infoUser['phone'] ?>" class="form-control" type="text">
                             </div>
                             <div class="form-group form-group--inline">
                               <label>Address<span>*</span>
                               </label>
-                              <input class="form-control" type="text">
+                              <input readonly value="<?php echo $infoUser['address'] ?>" class="form-control" type="text">
                             </div>
-                      <div class="form-group">
-                        <div class="ps-checkbox">
-                          <input class="form-control" type="checkbox" id="cb01">
-                          <label for="cb01">Create an account?</label>
-                        </div>
-                      </div>
-                      <h3 class="mt-40"> Addition information</h3>
-                      <div class="form-group form-group--inline textarea">
-                        <label>Order Notes</label>
-                        <textarea class="form-control" rows="5" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                      </div>
                     </div>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
@@ -269,21 +159,22 @@
                             </tr>
                           </thead>
                           <tbody>
+                            <?php
+                              $cartList = $cartRepository->findByUserIdAndStatus($infoUser['id'],1);
+                              foreach($cartList as $cart){
+                                $shoe = $shoeRepository->getById($cart['shoe_id'])->fetch_assoc();
+                            ?>
                             <tr>
-                              <td>HABITANT x1</td>
-                              <td>$300.00</td>
+                              <td><?php echo $shoe['shoe_name'] ?></td>
+                              <td><?php echo $shoe['price'] - $shoe['price']*$shoe['sale']*0.01 ?></td>
                             </tr>
-                            <tr>
-                              <td>Card Subtitle</td>
-                              <td>$300.00</td>
-                            </tr>
-                            <tr>
-                              <td>Order Total</td>
-                              <td>$300.00</td>
-                            </tr>
+                            <?php
+                              }
+                            ?>
                           </tbody>
                         </table>
                       </div>
+                      
                       <footer>
                         <h3>Payment Method</h3>
                         <div class="form-group cheque">
@@ -303,7 +194,19 @@
                             <li><a href="#"><img src="images/payment/2.png" alt=""></a></li>
                             <li><a href="#"><img src="images/payment/3.png" alt=""></a></li>
                           </ul>
-                          <button class="ps-btn ps-btn--fullwidth">Place Order<i class="ps-icon-next"></i></button>
+                            <button name="submit_payment" class="ps-btn ps-btn--fullwidth">Place Order<i class="ps-icon-next"></i></button>
+                          <?php
+                            if(isset($_POST['submit_payment'])){
+                              foreach($cartList as $cart){
+                                $shoe = $shoeRepository->getById($cart['shoe_id'])->fetch_assoc();
+                                $orderRepository->insert($cart['id']);
+                                $cartRepository->updateStatusByUserIdAndShoeId($infoUser['id'],$shoe['shoe_id'],2);
+                              }
+                              echo "<script>alert('Đặt hàng thành công');
+                                window.location.href='index.php';
+                                </script>";
+                            }
+                          ?>
                         </div>
                       </footer>
                     </div>

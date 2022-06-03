@@ -1,3 +1,8 @@
+<?php
+ require_once("sendemail.php");
+ $sendEmail = new SendEMail();
+?>
+
 <!DOCTYPE html>
 <!--[if IE 7]><html class="ie ie7"><![endif]-->
 <!--[if IE 8]><html class="ie ie8"><![endif]-->
@@ -75,66 +80,7 @@
                   <li class="menu-item menu-item-has-children dropdown"><a href="index.php">Home</a>
                   </li>
                   <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">Men</a>
-                    <div class="mega-menu">
-                      <div class="mega-wrap">
-                        <div class="mega-column">
-                          <ul class="mega-item mega-features">
-                            <li><a href="product-listing.php">NEW RELEASES</a></li>
-                            <li><a href="product-listing.php">FEATURES SHOES</a></li>
-                            <li><a href="product-listing.php">BEST SELLERS</a></li>
-                            <li><a href="product-listing.php">NOW TRENDING</a></li>
-                            <li><a href="product-listing.php">SUMMER ESSENTIALS</a></li>
-                            <li><a href="product-listing.php">MOTHER'S DAY COLLECTION</a></li>
-                            <li><a href="product-listing.php">FAN GEAR</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">Shoes</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">All Shoes</a></li>
-                            <li><a href="product-listing.php">Running</a></li>
-                            <li><a href="product-listing.php">Training & Gym</a></li>
-                            <li><a href="product-listing.php">Basketball</a></li>
-                            <li><a href="product-listing.php">Football</a></li>
-                            <li><a href="product-listing.php">Soccer</a></li>
-                            <li><a href="product-listing.php">Baseball</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">CLOTHING</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">Compression & Nike Pro</a></li>
-                            <li><a href="product-listing.php">Tops & T-Shirts</a></li>
-                            <li><a href="product-listing.php">Polos</a></li>
-                            <li><a href="product-listing.php">Hoodies & Sweatshirts</a></li>
-                            <li><a href="product-listing.php">Jackets & Vests</a></li>
-                            <li><a href="product-listing.php">Pants & Tights</a></li>
-                            <li><a href="product-listing.php">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">Accessories</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">Compression & Nike Pro</a></li>
-                            <li><a href="product-listing.php">Tops & T-Shirts</a></li>
-                            <li><a href="product-listing.php">Polos</a></li>
-                            <li><a href="product-listing.php">Hoodies & Sweatshirts</a></li>
-                            <li><a href="product-listing.php">Jackets & Vests</a></li>
-                            <li><a href="product-listing.php">Pants & Tights</a></li>
-                            <li><a href="product-listing.php">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">BRAND</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">NIKE</a></li>
-                            <li><a href="product-listing.php">Adidas</a></li>
-                            <li><a href="product-listing.php">Dior</a></li>
-                            <li><a href="product-listing.php">B&G</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
+                    
                   </li>
                   <li class="menu-item"><a href="#">Women</a></li>
                   <li class="menu-item"><a href="#">Kids</a></li>
@@ -159,33 +105,7 @@
               <button><i class="ps-icon-search"></i></button>
             </form>
             <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon-shopping-cart"></i></a>
-              <div class="ps-cart__listing">
-                <div class="ps-cart__content">
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/1.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">Amazin’ Glazin’</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/2.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">The Crusty Croissant</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/3.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">The Rolling Pin</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="ps-cart__total">
-                  <p>Number of items:<span>36</span></p>
-                  <p>Item Total:<span>£528.00</span></p>
-                </div>
-                <div class="ps-cart__footer"><a class="ps-btn" href="cart.php">Check out<i class="ps-icon-arrow-left"></i></a></div>
-              </div>
+            <?php require_once("formCart.php") ?>
             </div>
             <div class="menu-toggle"><span></span></div>
           </div>
@@ -207,30 +127,34 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
                   <div class="ps-section__header mb-50">
                     <h2 class="ps-section__title" data-mask="Contact">- Get in touch</h2>
-                    <form class="ps-contact__form" action="do_action" method="post">
+                    <form class="ps-contact__form" action="" method="post">
                       <div class="row">   
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                               <div class="form-group">
                                 <label>Name <sub>*</sub></label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input name="name" class="form-control" type="text" placeholder="">
                               </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                               <div class="form-group">
                                 <label>Email <sub>*</sub></label>
-                                <input class="form-control" type="email" placeholder="">
+                                <input name="email" class="form-control" type="email" placeholder="">
                               </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                               <div class="form-group mb-25">
                                 <label>Your Message <sub>*</sub></label>
-                                <textarea class="form-control" rows="6"></textarea>
+                                <textarea name="content" class="form-control" rows="6"></textarea>
                               </div>
                               <div class="form-group">
-                                <button class="ps-btn">Send Message<i class="ps-icon-next"></i></button>
+                                <button name="send_email" class="ps-btn">Send Message<i class="ps-icon-next"></i></button>
                               </div>
                             </div>
                       </div>
+                      <?php
+                        if(isset($_POST['send_email']))
+                          $sendEmail->send($_POST['name'],$_POST['email'],"Xin Chào",$_POST['content']);
+                      ?>
                     </form>
                   </div>
                 </div>

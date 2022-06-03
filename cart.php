@@ -1,5 +1,15 @@
 <?php
   require_once("backend/authWithCookie.php");
+  require_once("backend/auth.php");
+  require_once("repository/cartRepository.php");
+  require_once("repository/shoeRepository.php");
+
+  $cartRepository = new CartRepository();
+  $shoeRepository = new ShoeRepository();
+ 
+  $infoUser = Auth::loginWithCookie();
+  $cartList = $cartList = $cartRepository->findByUserIdAndStatus($infoUser['id'],1);
+
 ?>
 <!DOCTYPE html>
 <!--[if IE 7]><html class="ie ie7"><![endif]-->
@@ -77,68 +87,7 @@
                 <ul class="main-menu menu">
                   <li class="menu-item menu-item-has-children dropdown"><a href="index.php">Home</a>
                   </li>
-                  <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">Men</a>
-                    <div class="mega-menu">
-                      <div class="mega-wrap">
-                        <div class="mega-column">
-                          <ul class="mega-item mega-features">
-                            <li><a href="product-listing.php">NEW RELEASES</a></li>
-                            <li><a href="product-listing.php">FEATURES SHOES</a></li>
-                            <li><a href="product-listing.php">BEST SELLERS</a></li>
-                            <li><a href="product-listing.php">NOW TRENDING</a></li>
-                            <li><a href="product-listing.php">SUMMER ESSENTIALS</a></li>
-                            <li><a href="product-listing.php">MOTHER'S DAY COLLECTION</a></li>
-                            <li><a href="product-listing.php">FAN GEAR</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">Shoes</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">All Shoes</a></li>
-                            <li><a href="product-listing.php">Running</a></li>
-                            <li><a href="product-listing.php">Training & Gym</a></li>
-                            <li><a href="product-listing.php">Basketball</a></li>
-                            <li><a href="product-listing.php">Football</a></li>
-                            <li><a href="product-listing.php">Soccer</a></li>
-                            <li><a href="product-listing.php">Baseball</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">CLOTHING</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">Compression & Nike Pro</a></li>
-                            <li><a href="product-listing.php">Tops & T-Shirts</a></li>
-                            <li><a href="product-listing.php">Polos</a></li>
-                            <li><a href="product-listing.php">Hoodies & Sweatshirts</a></li>
-                            <li><a href="product-listing.php">Jackets & Vests</a></li>
-                            <li><a href="product-listing.php">Pants & Tights</a></li>
-                            <li><a href="product-listing.php">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">Accessories</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">Compression & Nike Pro</a></li>
-                            <li><a href="product-listing.php">Tops & T-Shirts</a></li>
-                            <li><a href="product-listing.php">Polos</a></li>
-                            <li><a href="product-listing.php">Hoodies & Sweatshirts</a></li>
-                            <li><a href="product-listing.php">Jackets & Vests</a></li>
-                            <li><a href="product-listing.php">Pants & Tights</a></li>
-                            <li><a href="product-listing.php">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">BRAND</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">NIKE</a></li>
-                            <li><a href="product-listing.php">Adidas</a></li>
-                            <li><a href="product-listing.php">Dior</a></li>
-                            <li><a href="product-listing.php">B&G</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                  <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">Men</a></li>
                   <li class="menu-item"><a href="#">Women</a></li>
                   <li class="menu-item"><a href="#">Kids</a></li>
                   <li class="menu-item menu-item-has-children dropdown"><a href="#">News</a>
@@ -161,34 +110,8 @@
               <input class="form-control" type="text" placeholder="Search Product…">
               <button><i class="ps-icon-search"></i></button>
             </form>
-            <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon-shopping-cart"></i></a>
-              <div class="ps-cart__listing">
-                <div class="ps-cart__content">
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/1.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">Amazin’ Glazin’</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/2.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">The Crusty Croissant</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/3.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">The Rolling Pin</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="ps-cart__total">
-                  <p>Number of items:<span>36</span></p>
-                  <p>Item Total:<span>£528.00</span></p>
-                </div>
-                <div class="ps-cart__footer"><a class="ps-btn" href="cart.php">Check out<i class="ps-icon-arrow-left"></i></a></div>
-              </div>
+            <div class="ps-cart"><a class="ps-cart__toggle" href="#"><i class="ps-icon-shopping-cart"></i></a>
+              <?php require_once("formCart.php") ?>
             </div>
             <div class="menu-toggle"><span></span></div>
           </div>
@@ -206,79 +129,70 @@
       <div class="ps-content pt-80 pb-80">
         <div class="ps-container">
           <div class="ps-cart-listing">
+            <form method="post">
             <table class="table ps-cart__table">
               <thead>
                 <tr>
-                  <th>All Products</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
+                <th>All Products</th>
+                  <th>Price<th>
+                  <th>Sale<th>
+                  <th>Size<th>
+                  <th>Color<th>
+                  <!-- <th>Quantity</th> -->
                   <th>Total</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
+                <input id="cartSize" style="display: none;" value="<?php echo $cartList->num_rows ?>" type="number">
+                <?php
+                  $count = 0;
+                  foreach($cartList as $cart){
+                    $shoe = $shoeRepository->getById($cart['shoe_id'])->fetch_assoc();
+                    $arrLinkImage = $shoeRepository->getImage($shoe['shoe_id']);
+                    if($arrLinkImage->num_rows > 0){
+                        $shoe_image= $arrLinkImage->fetch_assoc()['link_image'];
+                    }
+                    else{
+                        $shoe_image= "images/product/cart-preview/1.jpg";
+                    }
+                ?>
                 <tr>
-                  <td><a class="ps-product__preview" href="product-detail.php"><img class="mr-15" src="images/product/cart-preview/1.jpg" alt=""> air jordan One mid</a></td>
-                  <td>$150</td>
-                  <td>
+                  <td><a class="ps-product__preview" href="product-detail.php?id=<?php echo $cart['shoe_id'] ?>"><img width="100" class="mr-15" src="<?php echo $shoe_image ?>" alt=""> <?php echo $shoe['shoe_name'] ?></a></td>
+                  <td><span><?php echo $shoe['price'] ?></span> VND</td>
+                  <td> </td>
+                  <td><span id="price<?php echo $count ?>"><?php echo $shoe['price'] - $shoe['price']*$shoe['sale']*0.01 ?></span> VND <span><?php echo "(-".$shoe['sale']."%) "; ?></span></td>
+                  <td> </td>
+                  <td><span><?php echo $cart['shoe_size'] ?></span></td>
+                  <td> </td>
+                  <td><span><?php echo $cart['shoe_color'] ?></span></td>
+                  <td> </td>
+                  <!-- <td>
                     <div class="form-group--number">
-                      <button class="minus"><span>-</span></button>
-                      <input class="form-control" type="text" value="2">
-                      <button class="plus"><span>+</span></button>
+                      <button id="minus<?php echo $count ?>" class="minus"><span>-</span></button>
+                      <input name="quantity[]" id="quantity<?php echo $count ?>" class="form-control" type="text" value="1">
+                      <button id="plus<?php echo $count ?>" class="plus"><span>+</span></button>
                     </div>
-                  </td>
-                  <td>$300</td>
+                  </td> -->
+                  <td><span id="total<?php echo $count ?>"><?php echo $shoe['price'] - $shoe['price']*$shoe['sale']*0.01 ?></span> VND</td>
                   <td>
-                    <div class="ps-remove"></div>
+                    <a href="deleteCart.php?userId=<?php echo $infoUser['id'] ?>&shoeId=<?php echo $shoe['shoe_id'] ?>"><div class="ps-remove"></div></a>
                   </td>
                 </tr>
-                <tr>
-                  <td><a class="ps-product__preview" href="product-detail.php"><img class="mr-15" src="images/product/cart-preview/2.jpg" alt=""> The Crusty Croissant</a></td>
-                  <td>$150</td>
-                  <td>
-                    <div class="form-group--number">
-                      <button class="minus"><span>-</span></button>
-                      <input class="form-control" type="text" value="2">
-                      <button class="plus"><span>+</span></button>
-                    </div>
-                  </td>
-                  <td>$300</td>
-                  <td>
-                    <div class="ps-remove"></div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a class="ps-product__preview" href="product-detail.php"><img class="mr-15" src="images/product/cart-preview/3.jpg" alt="">The Rolling Pin</a></td>
-                  <td>$150</td>
-                  <td>
-                    <div class="form-group--number">
-                      <button class="minus"><span>-</span></button>
-                      <input class="form-control" type="text" value="2">
-                      <button class="plus"><span>+</span></button>
-                    </div>
-                  </td>
-                  <td>$300</td>
-                  <td>
-                    <div class="ps-remove"></div>
-                  </td>
-                </tr>
+                <?php
+                    $count++;
+                  }
+                ?>
               </tbody>
             </table>
             <div class="ps-cart__actions">
               <div class="ps-cart__promotion">
-                <div class="form-group">
-                  <div class="ps-form--icon"><i class="fa fa-angle-right"></i>
-                    <input class="form-control" type="text" placeholder="Promo Code">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <button class="ps-btn ps-btn--gray">Continue Shopping</button>
-                </div>
               </div>
               <div class="ps-cart__total">
-                <h3>Total Price: <span> 2599.00 $</span></h3><a class="ps-btn" href="checkout.php">Process to checkout<i class="ps-icon-next"></i></a>
+                <h3>Total Price: <span id="totalPrice"></span></h3>
+                <a href="checkout.php" class="ps-btn">Process to checkout<i class="ps-icon-next"></i></a>
               </div>
             </div>
+          </form>
           </div>
         </div>
       </div>
@@ -422,5 +336,57 @@
 <script type="text/javascript" src="plugins/revolution/js/extensions/revolution.extension.actions.min.js"></script>
     <!-- Custom scripts-->
     <script type="text/javascript" src="js/main.js"></script>
+    <script>
+      function eventMinus(i){
+        var price = document.getElementById("price"+i.toString()).innerText;
+        // var quantity = document.getElementById("quantity"+i.toString());
+        if(parseInt(quantity.value)>1){
+          quantity.value = parseInt(quantity.value)-1;
+          // document.getElementById("total"+i.toString()).innerText = parseFloat(price)*parseInt(quantity.value);
+          document.getElementById("total"+i.toString()).innerText = parseFloat(price);
+          totalPrice();
+        }
+          
+          
+      }
+      function plusMinus(i){
+        var price = document.getElementById("price"+i.toString()).innerText;
+        // var quantity = document.getElementById("quantity"+i.toString());
+        if(parseInt(quantity.value)<100){
+          quantity.value = parseInt(quantity.value)+1;
+          // document.getElementById("total"+i.toString()).innerText = parseFloat(price)*parseInt(quantity.value);
+          document.getElementById("total"+i.toString()).innerText = parseFloat(price);
+          totalPrice();
+        }
+          
+      }
+      function totalPrice(){
+        var cartSize = document.getElementById("cartSize").value;
+        var sum = 0;
+        for(var i=0;i<cartSize;i++){
+          var price = document.getElementById("total"+i.toString()).innerText;
+          sum+= parseInt(price);
+        }
+        document.getElementById("totalPrice").innerText = sum+" VND";
+      }
+
+
+      function calculator(i){
+        document.getElementById("minus"+i.toString()).onclick = ()=>{
+          eventMinus(i);
+        }
+        document.getElementById("plus"+i.toString()).onclick = ()=>{
+          plusMinus(i);
+        }
+      }
+
+      // var cartSize = document.getElementById("cartSize").value;
+      // for(var i=0;i<cartSize;i++){
+      //   calculator(i);
+      // }
+
+      totalPrice();
+      
+    </script>
   </body>
 </html>

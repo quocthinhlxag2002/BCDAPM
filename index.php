@@ -1,6 +1,9 @@
 <?php
   require_once("repository/shoeRepository.php");
+  require_once("sendemail.php");
   $shoeRepository = new ShoeRepository();
+  $sendEmail = new SendEMail();
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,13 +85,6 @@
                     <?php
                       require_once("backend/filterWithCookie.php");
                     ?>
-                    <!-- <div class="btn-group ps-dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language<i class="fa fa-angle-down"></i></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">English</a></li>
-                        <li><a href="#">Japanese</a></li>
-                        <li><a href="#">Chinese</a></li>
-                      </ul>
-                    </div> -->
                   </div>
                 </div>
           </div>
@@ -127,34 +123,8 @@
               <input class="form-control" type="text" placeholder="Search Product…">
               <button><i class="ps-icon-search"></i></button>
             </form>
-            <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon-shopping-cart"></i></a>
-              <div class="ps-cart__listing">
-                <div class="ps-cart__content">
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/1.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">Amazin’ Glazin’</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/2.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">The Crusty Croissant</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/3.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">The Rolling Pin</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="ps-cart__total">
-                  <p>Number of items:<span>36</span></p>
-                  <p>Item Total:<span>£528.00</span></p>
-                </div>
-                <div class="ps-cart__footer"><a class="ps-btn" href="cart.php">Check out<i class="ps-icon-arrow-left"></i></a></div>
-              </div>
+            <div class="ps-cart"><a class="ps-cart__toggle" href="#"><i class="ps-icon-shopping-cart"></i></a>
+              <?php require_once("formCart.php") ?>
             </div>
             <div class="menu-toggle"><span></span></div>
           </div>
@@ -407,11 +377,11 @@
           </div>
         </div>
       </div>
-      <div class="ps-home-testimonial bg--parallax pb-80" data-background="images/background/parallax.jpg">
+      <div class="ps-home-testimonial bg--parallax pb-80" data-background="images/banner/giày-thể-thao-ragus-man-12.jpg">
         <div class="container">
           <div class="owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="0" data-owl-nav="false" data-owl-dots="true" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on" data-owl-animate-in="fadeIn" data-owl-animate-out="fadeOut">
             <div class="ps-testimonial">
-              <div class="ps-testimonial__thumbnail"><img src="images/testimonial/1.jpg" alt=""><i class="fa fa-quote-left"></i></div>
+              <div class="ps-testimonial__thumbnail"><img src="images/banner/giày-thể-thao-ragus-man-12.jpg" alt=""><i class="fa fa-quote-left"></i></div>
               <header>
                 <select class="ps-rating">
                   <option value="1">1</option>
@@ -427,7 +397,7 @@
               </footer>
             </div>
             <div class="ps-testimonial">
-              <div class="ps-testimonial__thumbnail"><img src="images/testimonial/2.jpg" alt=""><i class="fa fa-quote-left"></i></div>
+              <div class="ps-testimonial__thumbnail"><img src="images/banner/giày-thể-thao-ragus-man-12.jpg" alt=""><i class="fa fa-quote-left"></i></div>
               <header>
                 <select class="ps-rating">
                   <option value="1">1</option>
@@ -443,7 +413,7 @@
               </footer>
             </div>
             <div class="ps-testimonial">
-              <div class="ps-testimonial__thumbnail"><img src="images/testimonial/3.jpg" alt=""><i class="fa fa-quote-left"></i></div>
+              <div class="ps-testimonial__thumbnail"><img src="images/banner/giày-thể-thao-ragus-man-12.jpg" alt=""><i class="fa fa-quote-left"></i></div>
               <header>
                 <select class="ps-rating">
                   <option value="1">1</option>
@@ -469,22 +439,26 @@
             <p>Learn about our company profile, communityimpact, sustainable motivation, and more.</p>
           </header>
           <footer>
-            <form action="product-listing.php" method="post">
+            <form action="" method="post">
               <div class="form-group">
                 <label>Name<span>*</span></label>
-                <input class="form-control" type="text">
+                <input name="name" class="form-control" type="text">
               </div>
               <div class="form-group">
                 <label>Email<span>*</span></label>
-                <input class="form-control" type="email">
+                <input name="email" class="form-control" type="email">
               </div>
               <div class="form-group">
                 <label>Your message<span>*</span></label>
-                <textarea class="form-control" rows="4"></textarea>
+                <textarea name="content" class="form-control" rows="4"></textarea>
               </div>
               <div class="form-group text-center">
-                <button class="ps-btn">Send Message<i class="fa fa-angle-right"></i></button>
+                <button name="send_email" class="ps-btn">Send Message<i class="fa fa-angle-right"></i></button>
               </div>
+              <?php
+                if(isset($_POST['send_email']))
+                  $sendEmail->send($_POST['name'],$_POST['email'],"Xin Chào",$_POST['content']);
+              ?>
             </form>
           </footer>
         </div>

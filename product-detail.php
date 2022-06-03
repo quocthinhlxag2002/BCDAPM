@@ -1,9 +1,23 @@
 <?php
+  require_once("backend/auth.php");
   require_once("repository/shoeRepository.php");
+  require_once("repository/cartRepository.php");
+  
+  $cartRepository = new CartRepository();
   $shoeRepository = new ShoeRepository();
+
   $shoe = $shoeRepository->getById($_GET['id'])->fetch_assoc();
   $listShoe = $shoeRepository->getAll(12);
   $arrLinkImage = $shoeRepository->getImage($_GET['id']);
+
+
+  if(isset($_POST['submit_cart'])){
+    $user_id = Auth::loginWithCookie()['id'];
+    if($cartRepository->findByUserIdAndShoeIdAndStatus($user_id,$_GET['id'],1)->num_rows==0)
+      $cartRepository->insert($user_id,$_GET['id'],$_POST['choose_color'],$_POST['choose_size'],1);
+    header("Location: cart.php");
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,66 +111,7 @@
                   <li class="menu-item menu-item-has-children dropdown"><a href="index.php">Home</a>
                   </li>
                   <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">Men</a>
-                    <div class="mega-menu">
-                      <div class="mega-wrap">
-                        <div class="mega-column">
-                          <ul class="mega-item mega-features">
-                            <li><a href="product-listing.php">NEW RELEASES</a></li>
-                            <li><a href="product-listing.php">FEATURES SHOES</a></li>
-                            <li><a href="product-listing.php">BEST SELLERS</a></li>
-                            <li><a href="product-listing.php">NOW TRENDING</a></li>
-                            <li><a href="product-listing.php">SUMMER ESSENTIALS</a></li>
-                            <li><a href="product-listing.php">MOTHER'S DAY COLLECTION</a></li>
-                            <li><a href="product-listing.php">FAN GEAR</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">Shoes</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">All Shoes</a></li>
-                            <li><a href="product-listing.php">Running</a></li>
-                            <li><a href="product-listing.php">Training & Gym</a></li>
-                            <li><a href="product-listing.php">Basketball</a></li>
-                            <li><a href="product-listing.php">Football</a></li>
-                            <li><a href="product-listing.php">Soccer</a></li>
-                            <li><a href="product-listing.php">Baseball</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">CLOTHING</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">Compression & Nike Pro</a></li>
-                            <li><a href="product-listing.php">Tops & T-Shirts</a></li>
-                            <li><a href="product-listing.php">Polos</a></li>
-                            <li><a href="product-listing.php">Hoodies & Sweatshirts</a></li>
-                            <li><a href="product-listing.php">Jackets & Vests</a></li>
-                            <li><a href="product-listing.php">Pants & Tights</a></li>
-                            <li><a href="product-listing.php">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">Accessories</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">Compression & Nike Pro</a></li>
-                            <li><a href="product-listing.php">Tops & T-Shirts</a></li>
-                            <li><a href="product-listing.php">Polos</a></li>
-                            <li><a href="product-listing.php">Hoodies & Sweatshirts</a></li>
-                            <li><a href="product-listing.php">Jackets & Vests</a></li>
-                            <li><a href="product-listing.php">Pants & Tights</a></li>
-                            <li><a href="product-listing.php">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <div class="mega-column">
-                          <h4 class="mega-heading">BRAND</h4>
-                          <ul class="mega-item">
-                            <li><a href="product-listing.php">NIKE</a></li>
-                            <li><a href="product-listing.php">Adidas</a></li>
-                            <li><a href="product-listing.php">Dior</a></li>
-                            <li><a href="product-listing.php">B&G</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
+                    
                   </li>
                   <li class="menu-item"><a href="#">Women</a></li>
                   <li class="menu-item"><a href="#">Kids</a></li>
@@ -181,33 +136,7 @@
               <button><i class="ps-icon-search"></i></button>
             </form>
             <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon-shopping-cart"></i></a>
-              <div class="ps-cart__listing">
-                <div class="ps-cart__content">
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/1.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">Amazin’ Glazin’</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/2.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">The Crusty Croissant</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.php"></a><img src="images/cart-preview/3.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.php">The Rolling Pin</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="ps-cart__total">
-                  <p>Number of items:<span>36</span></p>
-                  <p>Item Total:<span>£528.00</span></p>
-                </div>
-                <div class="ps-cart__footer"><a class="ps-btn" href="cart.php">Check out<i class="ps-icon-arrow-left"></i></a></div>
-              </div>
+            <?php require_once("formCart.php") ?>
             </div>
             <div class="menu-toggle"><span></span></div>
           </div>
@@ -280,9 +209,10 @@
                   <h4>QUICK REVIEW</h4>
                   <p><?php echo substr($shoe['review'],0,100); ?></p>
                 </div>
+                <form action="" method="POST">
                 <div class="ps-product__block ps-product__size">
                   <h4>CHOOSE YOUR COLOR</h4>
-                  <select class="ps-select selectpicker">
+                  <select name="choose_color" class="ps-select selectpicker">
                   <?php
                       $arrColor = explode(",",$shoe['color']);
                       foreach($arrColor as $color){
@@ -295,7 +225,7 @@
                 </div>
                 <div class="ps-product__block ps-product__size">
                   <h4>CHOOSE SIZE</h4>
-                  <select class="ps-select selectpicker">
+                  <select name="choose_size" class="ps-select selectpicker">
                   <?php
                       $arrSize = explode(",",$shoe['size']);
                       foreach($arrSize as $size){
@@ -306,9 +236,13 @@
                   ?>
                   </select>
                 </div>
-                <div class="ps-product__shopping"><a class="ps-btn mb-10" href="cart.php">Add to cart<i class="ps-icon-next"></i></a>
+                <div class="ps-product__shopping">
+                <!-- <a class="ps-btn mb-10" href="cart.php?id=">Add to cart<i class="ps-icon-next"></i></a> --> 
+                <button name="submit_cart" class="ps-btn mb-10">Add to cart<i class="ps-icon-next"></i></button>
                   <div class="ps-product__actions"><a class="mr-10" href="whishlist.php"><i class="ps-icon-heart"></i></a><a href="compare.php"><i class="ps-icon-share"></i></a></div>
                 </div>
+                </form>
+                
               </div>
               <div class="clearfix"></div>
               <div class="ps-product__content mt-50">
