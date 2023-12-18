@@ -212,7 +212,7 @@
                     </div>
                     <div class="ps-shipping">
                       <h3>FREE SHIPPING</h3>
-                      <p>YOUR ORDER QUALIFIES FOR FREE SHIPPING.<br> <a href="#"> Singup </a> for free shipping on every order, every time.</p>
+                      <p>YOUR ORDER QUALIFIES FOR FREE SHIPPING <br> <a href="#"> Singup </a> for free shipping on every order, every time.</p>
                     </div>
                   </div>
             </div>
