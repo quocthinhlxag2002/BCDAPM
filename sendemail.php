@@ -10,8 +10,8 @@
 
    class SendEMail{
        public function send($username,$email,$title,$content){
-        $account = "truongsendmail@gmail.com";
-        $password="truongjae27";
+        $account = "adminsendmail@gmail.com";
+        $password="admin123";
         $mail = new PHPMailer(true);
         try{
             $mail->SMTPDebug = 0;
