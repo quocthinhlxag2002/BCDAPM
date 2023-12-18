@@ -239,8 +239,8 @@
                       <footer>
                         <p><strong>PO Box 16122 Collins  Victoria 3000 Australia</strong></p>
                         <p>Email: <a href='mailto:support@store.com'>support@store.com</a></p>
-                        <p>Phone: +323 32434 5334</p>
-                        <p>Fax: ++323 32434 5333</p>
+                        <p>Phone: +323 32834 5334</p>
+                        <p>Fax: ++323 32534 5333</p>
                       </footer>
                     </aside>
                   </div>
@@ -285,7 +285,7 @@
                           <li><a href="#">Shoes</a></li>
                           <li><a href="#">Clothing</a></li>
                           <li><a href="#">Accessries</a></li>
-                          <li><a href="#">Football Boots</a></li>
+                          <li><a href="#">Football Boot</a></li>
                         </ul>
                       </footer>
                     </aside>
